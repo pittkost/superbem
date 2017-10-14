@@ -1,0 +1,51 @@
+@mixin block($name) {
+    .#{$name} {
+        $block: #{$name} !global;
+        $this: $name !global;
+
+        @content;
+    }
+}
+
+@mixin element($name) {
+    $self: $this;
+
+    @at-root .#{$this}__#{$name} {
+        $this: #{$this}__#{$name} !global;
+
+        @content;
+
+        $this: $self !global;
+    }
+}
+
+@mixin modifier($name) {
+    $self: $this;
+
+    @at-root .#{$this}--#{$name} {
+        @extend .#{$this};
+        @content;
+    }
+}
+
+@mixin is-after($name) {
+    @at-root .#{$name} + .#{$this} {
+        @content;
+    }
+}
+
+@mixin is-preceded-by($name) {
+    @at-root .#{$name} ~ .#{$this} {
+        @content;
+    }
+}
+
+@mixin is-inside($name) {
+    @at-root .#{$name} > .#{$this} {
+        @content;
+    }
+}
+
+@function element($name) {
+    @return #{$block}__#{$name};
+}

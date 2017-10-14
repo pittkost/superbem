@@ -1,0 +1,25 @@
+{
+  "name": "superbem",
+  "version": "0.1.0",
+  "description": "Superbem is a very simple Sass tool for writing BEM-ish CSS with ease.",
+  "main": "superbem.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/pittkost/superbem.git"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "bem",
+    "css"
+  ],
+  "author": "Piotr Kostrzewa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pittkost/superbem/issues"
+  },
+  "homepage": "https://github.com/pittkost/superbem#readme"
+}
