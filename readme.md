@@ -111,19 +111,15 @@ In addition Superbem comes with an `element()` function that accepts one attribu
     }
 
     @include element(my-second-element) {
-        @include is-after(my-element) {
+        @include is-after(element(my-element)) {
             // ...
         }
-    }
 
-    @include element(my-second-element) {
-        @include is-preceded-by(my-element) {
+        @include is-preceded-by(element(my-element)) {
             // ...
         }
-    }
 
-    @include element(my-second-element) {
-        @include is-inside(my-element) {
+        @include is-inside(element(my-element)) {
             // ...
         }
     }
