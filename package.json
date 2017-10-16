@@ -1,6 +1,6 @@
 {
   "name": "superbem",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "Superbem is a very simple Sass tool for writing BEM-ish CSS with ease.",
   "main": "superbem.scss",
   "scripts": {

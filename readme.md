@@ -103,7 +103,7 @@ Then import it in your Sass file:
 That's it!
 
 ## Extras
-In addition Superbem comes with an `element()` function that accepts one attribute and prefixes it with the current block's name. Also, there are three mixins supporting relative styling:
+In addition Superbem comes with three mixins supporting styling with CSS combinators:
 ```
 @include block(my-block) {
     @include element(my-element) {
@@ -111,15 +111,15 @@ In addition Superbem comes with an `element()` function that accepts one attribu
     }
 
     @include element(my-second-element) {
-        @include is-after(element(my-element)) {
+        @include is-after(my-element) {
             // ...
         }
 
-        @include is-preceded-by(element(my-element)) {
+        @include is-preceded-by(my-element) {
             // ...
         }
 
-        @include is-inside(element(my-element)) {
+        @include is-inside(my-element) {
             // ...
         }
     }

@@ -1,51 +1,85 @@
 @mixin block($name) {
     .#{$name} {
-        $block: #{$name} !global;
-        $this: $name !global;
+        $block:   $name !global;
+        $element: null !global;
+        $this:    $name !global;
 
         @content;
+
+        $block:   null !global;
+        $element: null !global;
+        $this:    null !global;
     }
 }
 
 @mixin element($name) {
-    $self: $this;
+    $this: #{$block}__#{$name} !global;
 
-    @at-root .#{$this}__#{$name} {
-        $this: #{$this}__#{$name} !global;
+    @if $element {
+        $element: #{$block}__#{$name} !global;
 
-        @content;
+        .#{$element} {
+            @content;
+        }
+    } @else {
+        $element: #{$block}__#{$name} !global;
 
-        $this: $self !global;
+        @at-root .#{$element} {
+            @content;
+        }
     }
+
+    $this:    $block !global;
+    $element: null !global;
 }
 
 @mixin modifier($name) {
-    $self: $this;
-
     @at-root .#{$this}--#{$name} {
-        @extend .#{$this};
+        @extend .#{$this} !optional;
         @content;
     }
 }
 
-@mixin is-after($name) {
-    @at-root .#{$name} + .#{$this} {
+@mixin is-after($scope) {
+    $expression: null;
+
+    @if str-index(#{$scope}, '.') {
+        $expression: '#{$scope} + .#{$this}';
+    } @else if str-index($scope, '__') {
+        $expression: '.#{$scope} + .#{$this}';
+    } @else {
+        $expression: '.#{$block}__#{$scope} + .#{$this}';
+    }
+
+    @at-root #{$expression} {
         @content;
     }
 }
 
-@mixin is-preceded-by($name) {
-    @at-root .#{$name} ~ .#{$this} {
+@mixin is-preceded-by($scope) {
+    @if str-index(#{$scope}, '.') {
+        $expression: '#{$scope} ~ .#{$this}';
+    } @else if str-index($scope, '__') {
+        $expression: '.#{$scope} ~ .#{$this}';
+    } @else {
+        $expression: '.#{$block}__#{$scope} ~ .#{$this}';
+    }
+
+    @at-root #{$expression} {
         @content;
     }
 }
 
-@mixin is-inside($name) {
-    @at-root .#{$name} > .#{$this} {
+@mixin is-inside($scope) {
+    @if str-index(#{$scope}, '.') {
+        $expression: '#{$scope} > .#{$this}';
+    } @else if str-index($scope, '__') {
+        $expression: '.#{$scope} > .#{$this}';
+    } @else {
+        $expression: '.#{$block}__#{$scope} > .#{$this}';
+    }
+
+    @at-root #{$expression} {
         @content;
     }
-}
-
-@function element($name) {
-    @return #{$block}__#{$name};
 }
