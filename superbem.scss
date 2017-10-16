@@ -45,7 +45,3 @@
         @content;
     }
 }
-
-@function element($name) {
-    @return #{$block}__#{$name};
-}
