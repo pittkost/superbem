@@ -1,21 +1,19 @@
 @mixin block($name) {
     .#{$name} {
-        $block:   $name !global;
-        $element: null !global;
-        $this:    $name !global;
+        $block:    $name !global;
+        $this:     $name !global;
 
         @content;
 
-        $block:   null !global;
-        $element: null !global;
-        $this:    null !global;
+        $block:    null !global;
+        $this:     null !global;
     }
 }
 
 @mixin element($name) {
     $this: #{$block}__#{$name} !global;
 
-    @if $element {
+    @if (global-variable-exists(element) and $element) or (global-variable-exists(modifier) and $modifier) {
         $element: #{$block}__#{$name} !global;
 
         .#{$element} {
@@ -35,8 +33,12 @@
 
 @mixin modifier($name) {
     @at-root .#{$this}--#{$name} {
+        $modifier: #{$this}__#{$name} !global;
+
         @extend .#{$this} !optional;
         @content;
+
+        $modifier: null !global;
     }
 }
 
