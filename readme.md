@@ -71,7 +71,7 @@ To achieve the same result, Superbem brings a syntax like this:
     }
 }
 ```
-The blocks and the element makes the "closures", when modifiers only lives inside the scope of they targets. Everywhere in the hierarchy you can access the current scope through the `$this` variable. Let's look:
+The blocks and the elements make scopes, when modifiers only live inside the scope of the classes they modify. Everywhere in the hierarchy you can access the current scope through the `$this` variable. Let's look:
 ```
 @include block(my-block) {
     // $this called in here is "my-block"
