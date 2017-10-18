@@ -10,6 +10,10 @@
     }
 }
 
+@mixin b($name) {
+    @include block($name);
+}
+
 @mixin element($name) {
     $this: #{$block}__#{$name} !global;
 
@@ -31,6 +35,10 @@
     $element: null !global;
 }
 
+@mixin e($name) {
+    @include element($name);
+}
+
 @mixin modifier($name) {
     @at-root .#{$this}--#{$name} {
         $modifier: #{$this}__#{$name} !global;
@@ -40,6 +48,10 @@
 
         $modifier: null !global;
     }
+}
+
+@mixin m($name) {
+    @include modifier($name);
 }
 
 @mixin is-after($scope) {
